@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Your Name — Cybersecurity Portfolio</title>
+    <!-- Main stylesheet: ink-art monochrome theme -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Bootstrap CSS (utilities + grid only) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Defer JS for performance -->
+    <script src="js/terminal.js" defer></script>
+    <script src="js/github-repos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+  </head>
+  <body>
+    <!-- Terminal overlay (full-screen). Runs once per session. -->
+    <div id="terminal-overlay" role="dialog" aria-label="Loading terminal">
+      <div id="terminal" aria-hidden="false">
+        <div id="terminal-lines" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <main id="main-content">
+      <!-- Navigation (sticky) -->
+      <nav class="site-nav reveal" role="navigation" aria-label="Main navigation">
+        <div class="container d-flex align-items-center">
+          <a class="brand" href="#home">Tarun Choudhary</a>
+          <div class="ms-auto nav-links">
+            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="#skills">Skills</a>
+            <a class="nav-link" href="#projects">Projects</a>
+            <a class="nav-link" href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero / centered intro -->
+      <section id="home" class="hero reveal">
+        <div class="container text-center">
+          <h1 class="hero-title">Tarun Choudhary</h1>
+          <p class="hero-sub">Cybersecurity researcher & developer — selected projects and research.</p>
+          <p><a class="btn-outline-ink" href="#projects">View Projects</a></p>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="reveal section" aria-label="About">
+        <div class="container">
+          <h2>About</h2>
+          <p class="lead">I am passionate about cybersecurity and focused on understanding how systems are attacked and defended. My interests include security monitoring, threat detection, and incident response in Security Operations Center environments. Through hands-on practice, I build skills in log analysis, network monitoring, Linux, and security investigation while continuously learning modern attack and defense techniques. My goal is to help detect threats, identify vulnerabilities, and protect digital systems.
+          </p>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section id="skills" class="reveal section" aria-label="Skills">
+        <div class="container">
+          <h2>Skills</h2>
+          <div class="row g-3">
+            <div class="col-6 col-md-3"><div class="skill">Penetration Testing</div></div>
+            <div class="col-6 col-md-3"><div class="skill">Threat Intel</div></div>
+            <div class="col-6 col-md-3"><div class="skill">Tooling / Scripting</div></div>
+            <div class="col-6 col-md-3"><div class="skill">Cloud Security</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="projects-section reveal" aria-label="Projects">
+        <h2>Projects</h2>
+        <p>Latest public repositories fetched from GitHub for <strong>noxx-code</strong>.</p>
+
+        <!-- Controls: search + language filters -->
+        <div id="repos-controls">
+          <input id="repos-search" type="search" placeholder="Search repositories..." aria-label="Search repositories">
+          <div id="repos-filters" aria-label="Filter by language"></div>
+        </div>
+
+        <!-- Loading spinner shown while fetching -->
+        <div id="repos-spinner" class="spinner-center" aria-hidden="false">
+          <div class="spinner-border" role="status" aria-hidden="true" style="border-color:var(--muted);width:1.6rem;height:1.6rem"></div>
+          <span style="margin-left:12px;color:var(--muted)">Fetching repositories...</span>
+        </div>
+
+        <!-- Error message placeholder -->
+        <div id="repos-error" class="alert" role="alert" style="display:none;max-width:900px;background:transparent;border:1px solid var(--line);color:var(--muted)"></div>
+
+        <!-- Repos will be injected here as Bootstrap cards -->
+        <div id="repos-container" class="row g-3" aria-live="polite"></div>
+      </section>
+
+      <footer id="contact" class="reveal section">
+        <div class="container">
+          <h2>Contact</h2>
+          <p style="color:var(--muted)">Email: <a href="mailto:you@example.com" style="color:var(--muted)">you@example.com</a></p>
+        </div>
+      </footer>
+    </main>
+
+    <noscript>
+      <div style="padding:20px;color:var(--muted);text-align:center">JavaScript is required for some features (terminal intro, GitHub fetching).</div>
+    </noscript>
+  </body>
+</html>
