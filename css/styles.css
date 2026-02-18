@@ -1,0 +1,140 @@
+/* styles.css - Ink-art / monochrome theme
+
+	 Notes:
+	 - Converted to a minimal black & white ink-art aesthetic.
+	 - Removed neon/cyberpunk colors and shadows.
+	 - Added semantic spacing, thin borders, outline buttons and subtle paper texture.
+*/
+
+/* Fonts: headings use a serif/ink-like face, body uses a clean sans-serif for readability. */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+:root{
+	--bg:#000000; /* pure black */
+	--fg:#ffffff; /* white text */
+	--muted:#bfbfbf; /* soft white/gray for secondary text */
+	--line:rgba(255,255,255,0.08); /* thin border */
+	--paper:rgba(255,255,255,0.02); /* subtle paper tint */
+}
+
+html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+
+/* Main content reveal */
+#main-content{opacity:0;transition:opacity 480ms ease-in-out;min-height:100vh}
+
+/* Terminal overlay */
+#terminal-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--fg);z-index:9999;-webkit-font-smoothing:antialiased;transition:opacity 600ms ease-in-out}
+
+#terminal{width:min(980px,94%);max-width:980px;padding:28px;border-radius:6px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid var(--line)}
+
+.term-line{font-size:clamp(14px,2.2vw,18px);line-height:1.45;white-space:pre-wrap;word-break:break-word;color:var(--fg)}
+
+/* Cursor: white block with blink */
+.cursor{display:inline-block;width:10px;height:1.05em;margin-left:6px;background:var(--fg);vertical-align:bottom;opacity:0.95;animation:blink 1s steps(2,start) infinite}
+@keyframes blink{50%{opacity:0}}
+
+#terminal-overlay.fade-out{opacity:0;pointer-events:none}
+
+@media (max-width:420px){#terminal{padding:18px}}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}#terminal-overlay{transition:none}#main-content{transition:none}}
+
+/* Projects section styling - monochrome, thin borders, minimal shadows removed */
+.projects-section{padding:36px 20px;max-width:1100px;margin:28px auto;color:var(--fg)}
+.projects-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:2rem;margin-bottom:8px}
+.projects-section p{color:var(--muted);margin-bottom:16px}
+
+.repo-card{background:transparent;border:1px solid var(--line);color:var(--fg)}
+.repo-card a{color:var(--fg);text-decoration:none;font-weight:600}
+.repo-card .card-body{padding:18px;min-height:160px;display:flex;flex-direction:column}
+.meta{font-size:0.88rem;color:var(--muted)}
+.spinner-center{display:flex;align-items:center;justify-content:center;padding:28px}
+
+/* Language badge (thin outline style) */
+.lang-badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:0.75rem;border:1px solid var(--line);color:var(--muted);margin-right:8px;background:transparent}
+
+/* Load animation for cards */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.load-anim{opacity:0;transform:translateY(8px);animation:fadeInUp 420ms ease-out forwards}
+
+/* Navigation (sticky) */
+
+.site-nav{position:sticky;top:0;z-index:60;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4));backdrop-filter:blur(4px);border-bottom:1px solid rgba(255,255,255,0.02)}
+.site-nav .container{display:flex;align-items:center;padding:12px 18px}
+.site-nav .brand{font-family:'Playfair Display',serif;color:var(--fg);text-decoration:none;font-size:1.05rem}
+.site-nav .nav-link{color:var(--muted);text-decoration:none;margin-left:14px}
+.site-nav .nav-link:focus,.site-nav .nav-link:hover{color:var(--fg);text-decoration:underline}
+
+/* Hero */
+.hero{padding:72px 12px 44px;text-align:center}
+.hero-title{font-family:'Playfair Display',serif;font-size:3.2rem;margin:0 0 12px}
+.hero-sub{color:var(--muted);max-width:780px;margin:0 auto 18px}
+
+.section{padding:56px 12px}
+.lead{color:var(--muted);max-width:720px}
+
+.skill{padding:12px;border:1px solid var(--line);border-radius:8px;color:var(--muted);text-align:center}
+
+/* Card hover and button */
+.repo-card:hover{border-color:rgba(255,255,255,0.14)}
+.repo-card a.button-link{display:inline-block;margin-top:12px;border:1px solid var(--line);padding:6px 10px;border-radius:6px;color:var(--fg);text-decoration:none}
+.repo-card .card-title a{font-size:1.05rem}
+
+/* Reveal animations */
+.reveal{opacity:0;transform:translateY(8px);transition:opacity 420ms ease,transform 420ms ease}
+.reveal.in-view{opacity:1;transform:none}
+
+/* Paper texture overlay (subtle) */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="n"><feTurbulence baseFrequency="0.8" numOctaves="1" seed="10"/></filter><rect width="100%" height="100%" fill="white" filter="url(%23n)" opacity="0.02"/></svg>');mix-blend-mode:overlay;opacity:0.7}
+
+/* Filter/search controls */
+#repos-controls{display:flex;gap:12px;align-items:center;margin:20px 0;flex-wrap:wrap}
+#repos-search{min-width:220px;max-width:420px;background:transparent;border:1px solid var(--line);color:var(--fg);padding:8px 12px;border-radius:6px}
+#repos-filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{background:transparent;border:1px solid var(--line);color:var(--fg);padding:6px 10px;border-radius:999px;cursor:pointer}
+.filter-btn.active{background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.12)}
+
+/* Outline button style used across site */
+.btn-outline-ink{background:transparent;border:1px solid var(--line);color:var(--fg);padding:8px 12px;border-radius:6px}
+
+/* Navigation */
+/* Navigation (clean + horizontal layout) */
+.site-nav{
+  position:sticky;
+  top:0;
+  z-index:60;
+  background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4));
+  backdrop-filter:blur(4px);
+  border-bottom:1px solid rgba(255,255,255,0.02);
+}
+
+.site-nav .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between; /* logo left, links right */
+  padding:16px 24px;
+}
+
+/* nav links container */
+.nav-links{
+  display:flex;
+  gap:20px;
+}
+
+/* link styling */
+.site-nav .nav-link{
+  color:var(--muted);
+  text-decoration:none;
+}
+
+.site-nav .nav-link:hover{
+  color:var(--fg);
+}
+
+/* Footer */
+footer{color:var(--muted);padding:28px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.02)}
+
+/* Accessibility helpers */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* Responsive tweaks */
+@media (max-width:576px){#repos-controls{flex-direction:column;align-items:flex-start}#repos-search{width:100%}}
